@@ -1,10 +1,11 @@
 from tkinter import *
+import math
 root=Tk()
-root.geometry("700x350")
+root.geometry("1000x750")
 root.title("Graphing cuz i cant come up with better name")
-canvas = Canvas(root, width=200, height=200)
+canvas = Canvas(root, width=1000, height=1000)
 canvas.pack()
-dict={1:[2,4],2:[5],3:[1,5]}
+dict={1:[2,6,4],2:[5],3:[1,5],7:[8,2,9]}
 l1=[]
 for i in dict:
     if(i not in l1):
@@ -14,18 +15,13 @@ for i in dict:
             l1.append(j)
 print(l1)
 for i in l1:
-    if i%2!=0:
-        x0, y0, x1, y1 = 10, 10+40*(i-1), 30, 30+40*(i-1)
-    else:
-        x0, y0, x1, y1 = 50, 10+40*(i-2), 70, 30+40*(i-2)
-    canvas.create_oval(x0, y0, x1, y1, outline='black')
-    c1, c2=(x0+x1)/2,(y0+y1)/2
-    canvas.create_text((x0+x1)/2,(y0+y1)/2,text=i)
+    c1=300+200*(math.cos(l1.index(i)*2*math.pi/len(l1)))
+    c2=300+200*(math.sin(l1.index(i)*2*math.pi/len(l1)))
+    canvas.create_oval(c1-10, c2-10, c1+10, c2+10, outline='black')
+    canvas.create_text(c1,c2,text=i)
     if i in dict:
         for j in dict[i]:
-            if j % 2 != 0:
-                x0, y0, x1, y1 = 10, 10 + 40 * (j - 1), 30, 30 + 40 * (j - 1)
-            else:
-                x0, y0, x1, y1 = 50, 10 + 40 * (j - 2), 70, 30 + 40 * (j - 2)
-            canvas.create_line(c1,c2,(x0+x1)/2,(y0+y1)/2)
+            c3=300+200*(math.cos(l1.index(j)*2*math.pi/len(l1)))
+            c4=300+200*(math.sin(l1.index(j)*2*math.pi/len(l1)))
+            canvas.create_line(c1,c2,c3,c4)
 root.mainloop()

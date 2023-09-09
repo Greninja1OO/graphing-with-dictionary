@@ -19,12 +19,13 @@ for i in l1:
     else:
         x0, y0, x1, y1 = 50, 10+40*(i-2), 70, 30+40*(i-2)
     canvas.create_oval(x0, y0, x1, y1, outline='black')
+    c1, c2=(x0+x1)/2,(y0+y1)/2
     canvas.create_text((x0+x1)/2,(y0+y1)/2,text=i)
     if i in dict:
         for j in dict[i]:
             if j % 2 != 0:
-                x0, y0, x1, y1 = 10, 10 + 40 * (i - 1), 30, 30 + 40 * (i - 1)
+                x0, y0, x1, y1 = 10, 10 + 40 * (j - 1), 30, 30 + 40 * (j - 1)
             else:
-                x0, y0, x1, y1 = 50, 10 + 40 * (i - 2), 70, 30 + 40 * (i - 2)
-            canvas.create_line(10,10,70,30)
+                x0, y0, x1, y1 = 50, 10 + 40 * (j - 2), 70, 30 + 40 * (j - 2)
+            canvas.create_line(c1,c2,(x0+x1)/2,(y0+y1)/2)
 root.mainloop()
